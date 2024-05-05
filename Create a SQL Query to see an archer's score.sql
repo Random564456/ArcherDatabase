@@ -16,3 +16,22 @@ WHERE
 ORDER BY 
   c.startDate DESC, 
   s.TotalScore DESC;
+
+--Query to Enter Scores
+INSERT INTO CompetitionTable(startTime, startDate) VALUES (10:24, 2024-05-06);
+INSERT INTO RoundTable(TargetDistance, ArrowAmount) VALUES (12.34, 3);
+INSERT INTO Division(Recurve, Compound, RecurveBarebow, CompoundBarebow, Longbow) 
+VALUES (1, 1, 1, 1, 1);
+
+-- Query to Look up Competition Results
+SELECT 
+a.ArcherID, c.CompetitionID, a.FirstName, a.LastName, s.TotalScore  
+FROM 
+ArcherTable a
+JOIN ScoreTable s ON a.ArcherID = s.ArcherID
+JOIN CompetitionTable c ON s.CompetitionID = c.CompetitionID
+ORDER BY
+c.CompetitionID DESC;
+
+-- Query to Lookup Round Definition
+SELECT * FROM RoundTable;
