@@ -1,4 +1,6 @@
---This is a comment. Comment the first three lines if you can't create a database somehow.
+
+-- C233 ARCHERDATABASE CONFIG FILE
+
 DROP DATABASE IF EXISTS ArcherDatabase;
 CREATE DATABASE ArcherDatabase;
 USE ArcherDatabase;
@@ -11,89 +13,82 @@ DROP TABLE IF EXISTS DivisionTable;
 DROP TABLE IF EXISTS ClubScorerTable;
 DROP TABLE IF EXISTS ArcherTable;
 
+ -- TABLES
+
 CREATE TABLE ArcherTable(
 	ArcherID INT NOT NULL,
 	FirstName VARCHAR(20) NOT NULL,
 	LastName VARCHAR(20) NOT NULL,
-	PhoneNumber VARCHAR(10),
-	Street VARCHAR(50),
-	Suburb VARCHAR(20),
-	City VARCHAR(20),
-	Postcode CHAR(4),
-	Age SMALLINT(2),
-	Gender VARCHAR(30),
+	Age VARCHAR(30),
+	Gender ENUM('M', 'F'),
 	PRIMARY KEY(ArcherID)
 );
 
-CREATE TABLE ClubScorerTable(
-	ClubScorerID INT NOT NULL,
-	FirstName VARCHAR(20) NOT NULL,
-	LastName VARCHAR(20) NOT NULL,
-	PhoneNumber VARCHAR(10),
-	Street VARCHAR(50),
-	Suburb VARCHAR(20),
-	City VARCHAR(20),
-	Postcode CHAR(4),
-	Age SMALLINT(2),
-	Gender VARCHAR(30),
-	PRIMARY KEY(ClubScorerID)
+CREATE TABLE CatagoryTable(
+	CatagoryID INT NOT NULL,
+    ArcherID INT NOT NULL,
+    CompetitionID INT NOT NULL,
+    RoundName VARCHAR(255) NOT NULL,
+    Class VARCHAR(255) NOT NULL,
+    Equiptment VARCHAR(255),
+	PRIMARY KEY(Catagory),
+    FOREIGN KEY(ArcherID) REFERENCES ArcherTable(ArcherID),
+    FOREIGN KEY(CompetitionID) REFERENCES CompetitionTable(CompetitionID),
+    FOREIGN KEY(RoundName) REFERENCES RoundTable(RoundName)
 );
 
-CREATE TABLE DivisionTable(
-	DivisionID INT NOT NULL,
-	Gender VARCHAR(30),
-	Age SMALLINT(2),
-	Recurve SMALLINT(1),
-	Compound SMALLINT(1),
-	RecurveBarebow SMALLINT(1),
-	CompoundBarebow SMALLINT(1),
-	Longbow SMALLINT(1),
-	PRIMARY KEY(DivisionID)
+CREATE TABLE RoundTable(
+	RoundName VARCHAR(255) NOT NULL,
+    ArrowsAtDistance10m CHAR(10) DEFAULT '0',
+    ArrowsAtDistance20m CHAR(10) DEFAULT '0',
+    ArrowsAtDistance30m CHAR(10) DEFAULT '0',
+    ArrowsAtDistance40m CHAR(10) DEFAULT '0',
+    ArrowsAtDistance50m CHAR(10) DEFAULT '0',
+    ArrowsAtDistance60m CHAR(10) DEFAULT '0',
+    ArrowsAtDistance70m CHAR(10) DEFAULT '0',
+    ArrowsAtDistance80m CHAR(10) DEFAULT '0',
+    ArrowsAtDistance90m CHAR(10) DEFAULT '0',
+    PRIMARY KEY (RoundName)
 );
 
 CREATE TABLE CompetitionTable(
 	CompetitionID INT NOT NULL,
-	DivisionID INT,
-	ArcherID INT,
-	startDate DATE,
-	startTime TIME,
-	PRIMARY KEY(CompetitionID),
-	FOREIGN KEY(DivisionID) REFERENCES DivisionTable(DivisionID),
-	FOREIGN KEY(ArcherID) REFERENCES ArcherTable(ArcherID)
+	CompetitionName VARCHAR(255),
+    Championship VARCHAR(255) DEFAULT NULL,    
+	PRIMARY KEY(CompetitionID)
 );
 
 CREATE TABLE ScoreTable(
 	ScoreID INT NOT NULL,
-	ArcherID INT,
-	CompetitionID INT,
-	TotalScore INT,
+    CatagoryID INT NOT NULL,
+    EndNumber ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'),
+    Distance ENUM('20m', '30m', '40m', '50m', '60m', '70m', '90m'),
+    Arrow1 INT NOT NULL,
+    Arrow2 INT NOT NULL,
+    Arrow3 INT NOT NULL,
+    Arrow4 INT NOT NULL,
+    Arrow5 INT NOT NULL,
+    Arrow6 INT NOT NULL,
 	PRIMARY KEY(ScoreID),
-	FOREIGN KEY(ArcherID) REFERENCES ArcherTable(ArcherID),
 	FOREIGN KEY(CompetitionID) REFERENCES CompetitionTable(CompetitionID)
 );
 
-CREATE TABLE RoundTable(
-	RoundID INT NOT NULL,
-	CompetitionID INT,
-	ScoreID INT,
-	TargetDistance DOUBLE,
-	ArrowAmount SMALLINT(3),
-	PRIMARY KEY(RoundID),
-	FOREIGN KEY(CompetitionID) REFERENCES CompetitionTable(CompetitionID),
-	FOREIGN KEY(ScoreID) REFERENCES ScoreTable(ScoreID)
+CREATE TABLE TargetSizeTable(
+	Target CHAR(1),
+    FaceSize VARCHAR(255),
+    PRIMARY KEY (Target)
 );
 
-CREATE TABLE ArrowTable(
-	ArrowID INT NOT NULL,
-	ArcherID INT,
-	RoundID INT,
-	Arrow1 INT,
-	Arrow2 INT,
-	Arrow3 INT,
-	Arrow4 INT,
-	Arrow5 INT,
-	Arrow6 INT,
-	PRIMARY KEY(ArrowID),
-	FOREIGN KEY(ArcherID) REFERENCES ArcherTable(ArcherID),
-	FOREIGN KEY(RoundID) REFERENCES RoundTable(RoundID)
+CREATE TABLE EquiptmentTable(
+	Equiptment VARCHAR(5) NOT NULL,
+    EquiptmentName VARCHAR(255) NOT NULL,
+    PRIMARY KEY (Equiptment)
 );
+
+CREATE TABLE CatagoryEquiptmentTable(
+	RoundName VARCHAR(5) NOT NULL,
+    Catagory VARCHAR(255) NOT NULL,
+    DefaultEquiptment VARCHAR(4) NOT NULL,
+    FOREIGN KEY (RoundName) REFERENCES RoundTable(RoundName)
+);
+

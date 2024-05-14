@@ -1,4 +1,4 @@
---Inserting data into ArcherTable
+-- Inserting data into ArcherTable
 insert into ArcherTable (ArcherID, FirstName, LastName, PhoneNumber, Street, Suburb, City, Postcode, Age, Gender) values (1, 'Rhodie', 'Rider', '3309705020', '76 Cascade Parkway', 'Ohio', 'Akron', '44310', 61, 'Non-binary');
 insert into ArcherTable (ArcherID, FirstName, LastName, PhoneNumber, Street, Suburb, City, Postcode, Age, Gender) values (2, 'Teador', 'Keems', '5109040337', '035 Debs Plaza', 'California', 'Oakland', '94611', 39, 'Male');
 insert into ArcherTable (ArcherID, FirstName, LastName, PhoneNumber, Street, Suburb, City, Postcode, Age, Gender) values (3, 'Marcos', 'Escoffrey', '2028489773', '63454 Starling Point', 'District of Columbia', 'Washington', '20310', 10, 'Male');
