@@ -1,4 +1,3 @@
-
 -- C233 ARCHERDATABASE CONFIG FILE
 
 DROP DATABASE IF EXISTS ArcherDatabase;
@@ -6,12 +5,13 @@ CREATE DATABASE ArcherDatabase;
 USE ArcherDatabase;
 
 DROP TABLE IF EXISTS ArrowTable;
+DROP TABLE IF EXISTS CategoryTable;
 DROP TABLE IF EXISTS RoundTable;
-DROP TABLE IF EXISTS ScoreTable;
 DROP TABLE IF EXISTS CompetitionTable;
-DROP TABLE IF EXISTS DivisionTable;
-DROP TABLE IF EXISTS ClubScorerTable;
-DROP TABLE IF EXISTS ArcherTable;
+DROP TABLE IF EXISTS ScoreTable;
+DROP TABLE IF EXISTS TargetSizeTable;
+DROP TABLE IF EXISTS EquipmentTable;
+DROP TABLE IF EXISTS CategoryEquipmentTable;
 
  -- TABLES
 
@@ -22,19 +22,6 @@ CREATE TABLE ArcherTable(
 	Age VARCHAR(30),
 	Gender ENUM('M', 'F'),
 	PRIMARY KEY(ArcherID)
-);
-
-CREATE TABLE CatagoryTable(
-	CatagoryID INT NOT NULL,
-    ArcherID INT NOT NULL,
-    CompetitionID INT NOT NULL,
-    RoundName VARCHAR(255) NOT NULL,
-    Class VARCHAR(255) NOT NULL,
-    Equiptment VARCHAR(255),
-	PRIMARY KEY(Catagory),
-    FOREIGN KEY(ArcherID) REFERENCES ArcherTable(ArcherID),
-    FOREIGN KEY(CompetitionID) REFERENCES CompetitionTable(CompetitionID),
-    FOREIGN KEY(RoundName) REFERENCES RoundTable(RoundName)
 );
 
 CREATE TABLE RoundTable(
@@ -58,9 +45,29 @@ CREATE TABLE CompetitionTable(
 	PRIMARY KEY(CompetitionID)
 );
 
+CREATE TABLE TargetSizeTable(
+	Target CHAR(1),
+    FaceSize VARCHAR(255),
+    PRIMARY KEY (Target)
+);
+
+CREATE TABLE CategoryTable(
+	CategoryID INT NOT NULL AUTO_INCREMENT,
+    ArcherID INT NOT NULL,
+    CompetitionID INT NOT NULL,
+    RoundName VARCHAR(255) NOT NULL,
+    Class VARCHAR(255) NOT NULL,
+    Equipment VARCHAR(255),
+	PRIMARY KEY(CategoryID),
+    FOREIGN KEY(ArcherID) REFERENCES ArcherTable(ArcherID),
+    FOREIGN KEY(CompetitionID) REFERENCES CompetitionTable(CompetitionID),
+    FOREIGN KEY(RoundName) REFERENCES RoundTable(RoundName)
+);
+
+
 CREATE TABLE ScoreTable(
 	ScoreID INT NOT NULL,
-    CatagoryID INT NOT NULL,
+    CategoryID INT NOT NULL,
     EndNumber ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'),
     Distance ENUM('20m', '30m', '40m', '50m', '60m', '70m', '90m'),
     Arrow1 INT NOT NULL,
@@ -70,25 +77,19 @@ CREATE TABLE ScoreTable(
     Arrow5 INT NOT NULL,
     Arrow6 INT NOT NULL,
 	PRIMARY KEY(ScoreID),
-	FOREIGN KEY(CompetitionID) REFERENCES CompetitionTable(CompetitionID)
+	FOREIGN KEY(CategoryID) REFERENCES CategoryTable(CategoryID)
 );
 
-CREATE TABLE TargetSizeTable(
-	Target CHAR(1),
-    FaceSize VARCHAR(255),
-    PRIMARY KEY (Target)
+
+CREATE TABLE EquipmentTable(
+	Equipment VARCHAR(5) NOT NULL,
+    EquipmentName VARCHAR(255) NOT NULL,
+    PRIMARY KEY (Equipment)
 );
 
-CREATE TABLE EquiptmentTable(
-	Equiptment VARCHAR(5) NOT NULL,
-    EquiptmentName VARCHAR(255) NOT NULL,
-    PRIMARY KEY (Equiptment)
-);
-
-CREATE TABLE CatagoryEquiptmentTable(
+CREATE TABLE CategoryEquipmentTable(
 	RoundName VARCHAR(5) NOT NULL,
-    Catagory VARCHAR(255) NOT NULL,
-    DefaultEquiptment VARCHAR(4) NOT NULL,
+    Category VARCHAR(255) NOT NULL,
+    DefaultEquipment VARCHAR(4) NOT NULL,
     FOREIGN KEY (RoundName) REFERENCES RoundTable(RoundName)
 );
-
