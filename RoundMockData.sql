@@ -1,0 +1,13 @@
+INSERT INTO RoundTable (RoundName, ArrowsAtDistance90m, ArrowsAtDistance70m, ArrowsAtDistance50m, ArrowsAtDistance30m) VALUES ('WA90/1440', '36+', '36+', '36*', '36*');
+INSERT INTO RoundTable (RoundName, ArrowsAtDistance70m, ArrowsAtDistance60m, ArrowsAtDistance50m, ArrowsAtDistance30m) VALUES ('WA70/1440','36+','36+', '36*', '36*');
+INSERT INTO RoundTable (RoundName, ArrowsAtDistance60m, ArrowsAtDistance50m, ArrowsAtDistance40m, ArrowsAtDistance30m) VALUES ('WA60/1440','36+','36+', '36*', '36*');
+INSERT INTO RoundTable (RoundName, ArrowsAtDistance50m, ArrowsAtDistance40m, ArrowsAtDistance30m, ArrowsAtDistance20m) VALUES ('AA50/1440','36+','36+', '36*', '36*');
+INSERT INTO RoundTable (RoundName, ArrowsAtDistance40m, ArrowsAtDistance30m, ArrowsAtDistance20m) VALUES ('AA40/1440','36+','72x','36*');
+INSERT INTO RoundTable (RoundName, ArrowsAtDistance90m, ArrowsAtDistance70m, ArrowsAtDistance60m, ArrowsAtDistance50m) VALUES ('Long Sydney','30+','30+','30+','30+');
+INSERT INTO RoundTable (RoundName, ArrowsAtDistance70m, ArrowsAtDistance60m, ArrowsAtDistance50m, ArrowsAtDistance40m) VALUES ('Sydney','30+','30+','30+','30+');
+INSERT INTO RoundTable (RoundName, ArrowsAtDistance90m, ArrowsAtDistance70m, ArrowsAtDistance60m, ArrowsAtDistance50m) VALUES ('Long Brisbane','30+','30+','30*','30*');
+INSERT INTO RoundTable (RoundName, ArrowsAtDistance70m, ArrowsAtDistance60m, ArrowsAtDistance50m, ArrowsAtDistance40m) VALUES ('Brisbane','30+','30+','30*','30*');
+INSERT INTO RoundTable (RoundName, ArrowsAtDistance60m, ArrowsAtDistance50m, ArrowsAtDistance40m, ArrowsAtDistance30m) VALUES ('Adelaide', '30+','30+','30*','30*');
+INSERT INTO RoundTable (RoundName, ArrowsAtDistance50m, ArrowsAtDistance40m, ArrowsAtDistance30m, ArrowsAtDistance20m) VALUES ('Short Adelaide', '30+','30+','30*','30*');
+INSERT INTO RoundTable (RoundName, ArrowsAtDistance90m, ArrowsAtDistance70m, ArrowsAtDistance50m) VALUES ('Hobart','30+','30+','30+');
+INSERT INTO RoundTable (RoundName, ArrowsAtDistance70m, ArrowsAtDistance60m, ArrowsAtDistance50m) VALUES ('Perth','30+','30+','30+');
