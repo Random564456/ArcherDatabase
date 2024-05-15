@@ -1,0 +1,1 @@
+INSERT INTO TargetSizeTable (Target, FaceSize) VALUES ("*","80cm"), ("+","122cm"), ("x","80cm and 122cm");
