@@ -13,13 +13,12 @@ DROP TABLE IF EXISTS TargetSizeTable;
 DROP TABLE IF EXISTS EquipmentTable;
 DROP TABLE IF EXISTS CategoryEquipmentTable;
 
- -- TABLES
-
+-- TABLES
 CREATE TABLE ArcherTable(
 	ArcherID INT NOT NULL,
 	FirstName VARCHAR(20) NOT NULL,
 	LastName VARCHAR(20) NOT NULL,
-	Age VARCHAR(30),
+	Age INT,
 	Gender ENUM('M', 'F'),
 	PRIMARY KEY(ArcherID)
 );
@@ -63,32 +62,41 @@ CREATE TABLE CategoryTable(
     FOREIGN KEY(RoundName) REFERENCES RoundTable(RoundName)
 );
 
-
 CREATE TABLE ScoreTable(
-	ScoreID INT NOT NULL,
+	ScoreID INT NOT NULL AUTO_INCREMENT,
     CategoryID INT NOT NULL,
+    ArcherID INT NOT NULL,
     EndNumber ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'),
     Distance ENUM('20m', '30m', '40m', '50m', '60m', '70m', '90m'),
-    Arrow1 INT NOT NULL,
-    Arrow2 INT NOT NULL,
-    Arrow3 INT NOT NULL,
-    Arrow4 INT NOT NULL,
-    Arrow5 INT NOT NULL,
-    Arrow6 INT NOT NULL,
+	TotalScore INT NOT NULL,
 	PRIMARY KEY(ScoreID),
-	FOREIGN KEY(CategoryID) REFERENCES CategoryTable(CategoryID)
+	FOREIGN KEY(CategoryID) REFERENCES CategoryTable(CategoryID),
+    FOREIGN KEY(ArcherID) REFERENCES ArcherTable(ArcherID)
 );
 
+CREATE TABLE EndScoreTable(
+    EndID INT NOT NULL AUTO_INCREMENT,
+    ScoreID INT NOT NULL,
+    Arrow1 ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
+    Arrow2 ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
+    Arrow3 ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
+    Arrow4 ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
+    Arrow5 ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
+    Arrow6 ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
+    PRIMARY KEY(EndID),
+    FOREIGN KEY(ScoreID) REFERENCES ScoreTable(ScoreID)
+);
 
-CREATE TABLE EquipmentTable(
+CREATE TABLE EquipmentTable
+(
 	Equipment VARCHAR(5) NOT NULL,
     EquipmentName VARCHAR(255) NOT NULL,
     PRIMARY KEY (Equipment)
 );
 
 CREATE TABLE CategoryEquipmentTable(
-	RoundName VARCHAR(5) NOT NULL,
-    Category VARCHAR(255) NOT NULL,
-    DefaultEquipment VARCHAR(4) NOT NULL,
+	RoundName VARCHAR(255) NOT NULL DEFAULT NULL,
+    Category VARCHAR(255) NOT NULL DEFAULT NULL,
+    DefaultEquipment VARCHAR(255) NOT NULL,
     FOREIGN KEY (RoundName) REFERENCES RoundTable(RoundName)
 );
