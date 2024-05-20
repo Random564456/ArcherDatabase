@@ -6,6 +6,7 @@ SELECT
     ScoreTable.EndNumber,
     ScoreTable.Distance,
     ScoreTable.TotalScore,
+    ScoreTable.Date,
     CategoryTable.Class,
     CompetitionTable.CompetitionName,
     RoundTable.RoundName
@@ -21,4 +22,3 @@ FROM
     RoundTable ON CategoryTable.RoundName = RoundTable.RoundName
 ORDER BY
     ArcherTable.LastName, ArcherTable.FirstName, ScoreTable.ScoreID;
-

@@ -12,6 +12,8 @@ DROP TABLE IF EXISTS ScoreTable;
 DROP TABLE IF EXISTS TargetSizeTable;
 DROP TABLE IF EXISTS EquipmentTable;
 DROP TABLE IF EXISTS CategoryEquipmentTable;
+DROP TABLE IF EXISTS EndScoreTable;
+DROP TABLE IF EXISTS StagingTable;
 
 -- TABLES
 CREATE TABLE ArcherTable(
@@ -63,14 +65,15 @@ CREATE TABLE CategoryTable(
 );
 
 CREATE TABLE ScoreTable(
-	ScoreID INT NOT NULL AUTO_INCREMENT,
+    ScoreID INT NOT NULL AUTO_INCREMENT,
     CategoryID INT NOT NULL,
     ArcherID INT NOT NULL,
-    EndNumber ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'),
-    Distance ENUM('20m', '30m', '40m', '50m', '60m', '70m', '90m'),
-	TotalScore INT NOT NULL,
-	PRIMARY KEY(ScoreID),
-	FOREIGN KEY(CategoryID) REFERENCES CategoryTable(CategoryID),
+    EndNumber ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12') NULL,
+    Distance ENUM('20m', '30m', '40m', '50m', '60m', '70m', '90m') NULL,
+    Date DATE NOT NULL,
+    TotalScore INT NOT NULL,
+    PRIMARY KEY(ScoreID),
+    FOREIGN KEY(CategoryID) REFERENCES CategoryTable(CategoryID),
     FOREIGN KEY(ArcherID) REFERENCES ArcherTable(ArcherID)
 );
 
@@ -95,8 +98,32 @@ CREATE TABLE EquipmentTable
 );
 
 CREATE TABLE CategoryEquipmentTable(
-	RoundName VARCHAR(255) NOT NULL DEFAULT NULL,
-    Category VARCHAR(255) NOT NULL DEFAULT NULL,
+	RoundName VARCHAR(255) NOT NULL,
+    Category VARCHAR(255) NOT NULL,
     DefaultEquipment VARCHAR(255) NOT NULL,
     FOREIGN KEY (RoundName) REFERENCES RoundTable(RoundName)
+);
+
+DROP TABLE IF EXISTS StagingTable;
+
+CREATE TABLE StagingTable (
+    StagingID INT NOT NULL AUTO_INCREMENT,
+    ArcherID INT NOT NULL,
+    CategoryID INT NOT NULL,
+    Date DATE NOT NULL,
+    RoundName VARCHAR(255) NOT NULL,
+    Equipment VARCHAR(5) NOT NULL,
+    EndNumber ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'),
+    Distance ENUM('20m', '30m', '40m', '50m', '60m', '70m', '90m'),
+    Arrow1 ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
+    Arrow2 ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
+    Arrow3 ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
+    Arrow4 ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
+    Arrow5 ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
+    Arrow6 ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
+    PRIMARY KEY (StagingID),
+    FOREIGN KEY (ArcherID) REFERENCES ArcherTable(ArcherID),
+    FOREIGN KEY (CategoryID) REFERENCES CategoryTable(CategoryID),
+    FOREIGN KEY (RoundName) REFERENCES RoundTable(RoundName),
+    FOREIGN KEY (Equipment) REFERENCES EquipmentTable(Equipment)
 );

@@ -1,3 +1,3 @@
-INSERT INTO ScoreTable (CategoryID, ArcherID, EndNumber, Distance, TotalScore) VALUES (2, 12, '1', '20m', 130);
-INSERT INTO ScoreTable (CategoryID, ArcherID, EndNumber, Distance, TotalScore) VALUES (2, 12, '2', '40m', 70);
-INSERT INTO ScoreTable (CategoryID, ArcherID, EndNumber, Distance, TotalScore) VALUES (2, 12, '3', '90m', 34)
+INSERT INTO ScoreTable (CategoryID, ArcherID, EndNumber, Distance, TotalScore, Date) VALUES (2, 12, '1', '20m', 130, '2024-04-03 10:00:00');
+INSERT INTO ScoreTable (CategoryID, ArcherID, EndNumber, Distance, TotalScore, Date) VALUES (2, 12, '2', '40m', 70, '2024-04-03 10:30:00');
+INSERT INTO ScoreTable (CategoryID, ArcherID, EndNumber, Distance, TotalScore, Date) VALUES (2, 12, '3', '90m', 34, '2024-04-03 10:45:00');
