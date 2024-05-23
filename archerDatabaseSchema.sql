@@ -77,19 +77,6 @@ CREATE TABLE ScoreTable(
     FOREIGN KEY(ArcherID) REFERENCES ArcherTable(ArcherID)
 );
 
-CREATE TABLE EndScoreTable(
-    EndID INT NOT NULL AUTO_INCREMENT,
-    ScoreID INT NOT NULL,
-    Arrow1 ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
-    Arrow2 ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
-    Arrow3 ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
-    Arrow4 ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
-    Arrow5 ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
-    Arrow6 ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
-    PRIMARY KEY(EndID),
-    FOREIGN KEY(ScoreID) REFERENCES ScoreTable(ScoreID)
-);
-
 CREATE TABLE EquipmentTable
 (
 	Equipment VARCHAR(5) NOT NULL,
